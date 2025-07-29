@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bottom_sheet/flutter_bottom_sheet.dart';
+import 'package:flutter_scroll_bottom_sheet/flutter_bottom_sheet.dart';
 
 /// A custom [PopupRoute] that presents a bottom sheet with
 /// configurable animation, layout, and interaction behaviors.

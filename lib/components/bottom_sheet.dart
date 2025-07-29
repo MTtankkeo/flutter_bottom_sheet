@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bottom_sheet/flutter_bottom_sheet.dart';
+import 'package:flutter_scroll_bottom_sheet/flutter_bottom_sheet.dart';
 
 /// A simple utility class to manage bottom sheets throughout the app.
 ///
@@ -13,7 +13,7 @@ class BottomSheet {
   static BottomSheetConfig? config;
 
   /// Opens a bottom sheet by pushing a [BottomSheetRoute] onto the navigation stack.
-  void open(BuildContext context, Widget body) {
+  static void open(BuildContext context, Widget body) {
     Navigator.push(context, BottomSheetRoute(body: body, config: config));
   }
 

@@ -1,5 +1,5 @@
-name: flutter_bottom_sheet
-description: "A new Flutter package project."
+name: flutter_scroll_bottom_sheet
+description: "This package provides a flexible bottom sheet, built on top of the flutter_appbar package, that syncs with scroll events instead of relying only on gestures."
 version: 1.0.0
 publisher: ttankkeo112@gmail.com
 repository: https://github.com/MTtankkeo/flutter_bottom_sheet

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_appbar/flutter_appbar.dart';
-import 'package:flutter_bottom_sheet/flutter_bottom_sheet.dart';
+import 'package:flutter_scroll_bottom_sheet/flutter_bottom_sheet.dart';
 
 /// Wraps and renders the bottom sheet content as part of the custom
 /// bottom sheet system. Used internally by [BottomSheetRoute].

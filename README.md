@@ -4,7 +4,7 @@ This package provides a flexible bottom sheet, built on top of the flutter_appba
 ## Preview
 The gif image below may appear distorted and choppy due to compression.
 
-![preview](https://github.com/user-attachments/assets/8d61d51f-249a-4fd6-802c-32c1a04f10c6)
+![preview](https://github.com/user-attachments/assets/059081e1-a526-4545-bd7a-9d6fa482f458)
 
 ## Usage
 This section covers the basic usage of this package and how to integrate it into your application.

@@ -38,7 +38,9 @@ class BottomSheetRoute extends PopupRoute {
   String? get barrierLabel => null;
 
   @override
-  Duration get transitionDuration => _config.duration!;
+  Duration get transitionDuration {
+    return _config.fadeOutDuration ?? _config.duration!;
+  }
 
   @override
   Widget buildPage(

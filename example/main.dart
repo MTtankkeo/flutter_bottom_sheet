@@ -12,9 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(child: TestView())
-      ),
+      home: Scaffold(body: SafeArea(child: TestView())),
     );
   }
 }
@@ -27,13 +25,15 @@ class TestView extends StatelessWidget {
     return Center(
       child: TextButton(
         onPressed: () {
-          BottomSheet.open(context, ListView.builder(
-            padding: EdgeInsets.all(20),
-            itemCount: 100,
-            itemBuilder: (context, index) {
-              return Text("Hello, World!");
-            },
-          ));
+          BottomSheet.open(
+              context,
+              ListView.builder(
+                padding: EdgeInsets.all(20),
+                itemCount: 100,
+                itemBuilder: (context, index) {
+                  return Text("Hello, World!");
+                },
+              ));
         },
         child: Text("Oepn Bottom Sheet"),
       ),

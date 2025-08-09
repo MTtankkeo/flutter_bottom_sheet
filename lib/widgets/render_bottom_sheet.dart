@@ -213,13 +213,17 @@ class BottomSheetWidgetState extends State<BottomSheetWidget>
                 onPreScroll: _handleNestedScroll,
                 child: NotificationListener<ScrollEndNotification>(
                   onNotification: _handleScrollEnd,
-                  child: builder(
-                    context,
-                    RenderBottomSheet(
-                      state: this,
-                      child: PrimaryScrollController(
-                        controller: NestedScrollController(),
-                        child: widget.child,
+                  // To allow minimum size to be maintained.
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: builder(
+                      context,
+                      RenderBottomSheet(
+                        state: this,
+                        child: PrimaryScrollController(
+                          controller: NestedScrollController(),
+                          child: widget.child,
+                        ),
                       ),
                     ),
                   ),

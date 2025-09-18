@@ -22,6 +22,7 @@ class BottomSheetConfig {
     this.fadeOutCurve,
     this.initialFraction,
     this.barrierColor,
+    this.sheetBuilder,
     this.builder,
   });
 
@@ -54,8 +55,11 @@ class BottomSheetConfig {
   /// If null, defaults to transparent or system default.
   final Color? barrierColor;
 
-  /// A builder that wraps the bottom sheet content,
-  /// useful for applying consistent styling or layout.
+  /// A builder that builds the card-style container inside the bottom
+  /// sheet, applying consistent styling, shape, and background.
+  final BottomSheetBuilder? sheetBuilder;
+
+  /// A builder that builds the inner content of the bottom sheet.
   final BottomSheetBuilder? builder;
 
   /// Returns a new config where any null values are replaced
@@ -71,6 +75,7 @@ class BottomSheetConfig {
       fadeOutCurve: other.fadeOutCurve ?? fadeOutCurve,
       initialFraction: other.initialFraction ?? initialFraction,
       barrierColor: other.barrierColor ?? barrierColor,
+      sheetBuilder: other.sheetBuilder ?? sheetBuilder,
       builder: other.builder ?? builder,
     );
   }

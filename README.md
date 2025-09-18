@@ -41,6 +41,7 @@ BottomSheet.config = BottomSheetConfig(
     fadeInDuration: Duration(seconds: 1),
     fadeInCurve: Curves.ease,
     barrierColor: Colors.red,
-    builder: ...
+    sheetBuilder: ...,
+    builder: ...,
 );
 ```

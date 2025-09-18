@@ -181,31 +181,36 @@ class BottomSheetWidgetState extends State<BottomSheetWidget>
 
   @override
   Widget build(BuildContext context) {
-    final BottomSheetBuilder builder =
-        widget.config.builder ?? _defaultBottomSheetBuilder;
+    // The builder for the inner content of the bottom sheet.
+    final BottomSheetBuilder builder = widget.config.builder ?? _defaultBuilder;
+
+    // The builder for the bottom sheet itself, including its styling and shape.
+    final BottomSheetBuilder sheetBuilder =
+        widget.config.sheetBuilder ?? _defaultSheetBuilder;
+
+    // Retrieves the current theme from the context.
     final ThemeData theme = Theme.of(context);
+
+    // The modal barrier color, falling back to theme or semi-transparent black.
     final Color barrierColor = widget.config.barrierColor ??
         theme.bottomSheetTheme.modalBarrierColor ??
         Color.fromRGBO(0, 0, 0, 1).withAlpha(150);
 
-    return SafeArea(
-      bottom: false,
-      child: Stack(
-        children: [
-          // Semi-transparent background that fades in/out with bottom sheet expansion.
-          IgnorePointer(
-            ignoring: true,
-            child: Transform.scale(
-              scale: 1.5,
-              child: Opacity(
-                opacity: relFraction,
-                child: Container(color: barrierColor),
-              ),
-            ),
-          ),
+    // The fade alpha based on the relative animation fraction.
+    final int barrierAlpha = ((barrierColor.a * 255) * relFraction).toInt();
 
-          // Bottom sheet positioned and translated vertically based on animation state.
-          Positioned.fill(
+    return Stack(
+      children: [
+        // Semi-transparent background that fades in/out with bottom sheet expansion.
+        IgnorePointer(
+          ignoring: true,
+          child: Container(color: barrierColor.withAlpha(barrierAlpha)),
+        ),
+
+        // Bottom sheet positioned and translated vertically based on animation state.
+        Positioned.fill(
+          child: SafeArea(
+            bottom: false,
             child: FractionalTranslation(
               translation: Offset(0, 1 - absFraction),
               child: NestedScrollConnection(
@@ -213,16 +218,17 @@ class BottomSheetWidgetState extends State<BottomSheetWidget>
                 onPreScroll: _handleNestedScroll,
                 child: NotificationListener<ScrollEndNotification>(
                   onNotification: _handleScrollEnd,
+
                   // To allow minimum size to be maintained.
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: builder(
+                    child: sheetBuilder(
                       context,
                       RenderBottomSheet(
                         state: this,
                         child: PrimaryScrollController(
                           controller: NestedScrollController(),
-                          child: widget.child,
+                          child: builder(context, widget.child),
                         ),
                       ),
                     ),
@@ -231,18 +237,24 @@ class BottomSheetWidgetState extends State<BottomSheetWidget>
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
+  /// Provides the default shape for bottom sheets, used when no custom
+  /// shape is specified.
+  ///
+  /// Ensures consistent rounded top corners across sheets.
   static ShapeBorder get _defaultShape {
     return RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
     );
   }
 
-  static Widget _defaultBottomSheetBuilder(BuildContext context, Widget body) {
+  /// Builds the bottom sheet with [Material] styling, applying the theme's
+  /// background color and shape. Used as the default bottom sheet wrapper.
+  static Widget _defaultSheetBuilder(BuildContext context, Widget child) {
     final ThemeData theme = Theme.of(context);
     final Color? backgroundColor = theme.bottomSheetTheme.backgroundColor;
     final ShapeBorder shape = theme.bottomSheetTheme.shape ?? _defaultShape;
@@ -250,8 +262,14 @@ class BottomSheetWidgetState extends State<BottomSheetWidget>
     return Material(
       color: backgroundColor,
       shape: shape,
-      child: body,
+      child: child,
     );
+  }
+
+  /// Wraps content in a SafeArea to prevent it from overlapping system UI
+  /// elements. Used as the default builder for general content wrapping.
+  static Widget _defaultBuilder(BuildContext context, Widget child) {
+    return SafeArea(child: child);
   }
 }
 

@@ -13,8 +13,11 @@ class BottomSheet {
   static BottomSheetConfig? config;
 
   /// Opens a bottom sheet by pushing a [BottomSheetRoute] onto the navigation stack.
-  static void open(BuildContext context, Widget body) {
-    Navigator.push(context, BottomSheetRoute(body: body, config: config));
+  static Future<T?> open<T>(BuildContext context, Widget body) {
+    return Navigator.push<T>(
+      context,
+      BottomSheetRoute<T>(body: body, config: config),
+    );
   }
 
   /// Closes the currently displayed bottom sheet by popping its route.

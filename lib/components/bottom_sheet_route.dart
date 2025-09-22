@@ -11,7 +11,7 @@ import 'package:flutter_scroll_bottom_sheet/flutter_bottom_sheet.dart';
 ///   BottomSheetRoute(...)
 /// );
 /// ```
-class BottomSheetRoute extends PopupRoute {
+class BottomSheetRoute<T> extends PopupRoute<T> {
   BottomSheetRoute({
     required this.body,
     BottomSheetConfig? config,
